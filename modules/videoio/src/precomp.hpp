@@ -66,7 +66,7 @@
         #ifdef HAVE_MSMF
             #define _WIN32_WINNT 0x0600 // Windows Vista
         #else
-            #define _WIN32_WINNT 0x0500 // Windows 2000
+            #define _WIN32_WINNT 0x0501 // Windows XP
         #endif
     #endif
 
@@ -124,9 +124,11 @@ CvVideoWriter* cvCreateVideoWriter_MSMF( const char* filename, int fourcc,
 CvCapture* cvCreateCameraCapture_OpenNI( int index );
 CvCapture* cvCreateCameraCapture_OpenNI2( int index );
 CvCapture* cvCreateFileCapture_OpenNI( const char* filename );
+CvCapture* cvCreateFileCapture_OpenNI2( const char* filename );
 CvCapture* cvCreateCameraCapture_Android( int index );
 CvCapture* cvCreateCameraCapture_XIMEA( int index );
 CvCapture* cvCreateCameraCapture_AVFoundation(int index);
+CvCapture* cvCreateCameraCapture_Aravis( int index );
 
 CvCapture* cvCreateFileCapture_Images(const char* filename);
 CvVideoWriter* cvCreateVideoWriter_Images(const char* filename);
@@ -161,6 +163,10 @@ CvCapture * cvCreateCameraCapture_Unicap  (const int     index);
 CvCapture * cvCreateCameraCapture_PvAPI  (const int     index);
 CvVideoWriter* cvCreateVideoWriter_GStreamer( const char* filename, int fourcc,
                                             double fps, CvSize frameSize, int is_color );
+CvVideoWriter* cvCreateVideoWriterWithPreference(int api, const char* filename, int fourcc,
+                                           double fps, CvSize frame_size,
+                                           int is_color CV_DEFAULT(1));
+
 
 namespace cv
 {
@@ -192,6 +198,6 @@ namespace cv
 
     Ptr<IVideoCapture> createGPhoto2Capture(int index);
     Ptr<IVideoCapture> createGPhoto2Capture(const String& deviceName);
-};
+}
 
 #endif /* __VIDEOIO_H_ */
